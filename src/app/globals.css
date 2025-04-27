@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar__link:hover {
+    color: #ff8f9c;
+    transition: all 0.4s;
+}
+
+.navbar__link::after {
+    position: absolute;
+    content: "";
+    /* background-color: #ff8f9c; */
+    height: 3px;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+    scale: 0;
+    transform-origin: left;
+    transition: all 0.4s;
+}
+
+.navbar__link:hover::after {
+    scale: 1;
+}
+
+.dropdown__link {
+    white-space: nowrap;
+    display: block; 
+    width: max-content; 
+    padding: 8px 16px; 
+}
+
