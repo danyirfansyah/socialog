@@ -114,18 +114,18 @@ const HeaderMain = () => {
                 className="w-6 h-6"
               />
             </a>
-            <a href="https://wa.me/085646025146" target="_blank">
+            <a href="https://wa.me/085646025146" target="_blank" rel="noopener noreferrer">
               <img
                 src="/WA.png" // Ganti dengan icon WhatsApp yang sesuai
                 alt="WhatsApp"
                 className="w-6 h-6"
               />
             </a>
-            <a href="https://www.instagram.com/rakharazaqa" target="_blank">
+            <a href="https://www.instagram.com/rakharazaqa" target="_blank" rel="noopener noreferrer">
               <img
                 src="/Instagram.png" // Ganti dengan icon Instagram yang sesuai
                 alt="Instagram"
-                className="w- h-6"
+                className="w-6 h-6"
               />
             </a>
           </div>
