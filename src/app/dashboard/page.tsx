@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -30,6 +31,7 @@ export default function Dashboard() {
         <h1 className="text-3xl font-bold">Dashboard</h1>
         <p className="mt-2 text-lg">Welcome to your dashboard!</p>
       </main>
+      <Footer />
     </>
   );
 }

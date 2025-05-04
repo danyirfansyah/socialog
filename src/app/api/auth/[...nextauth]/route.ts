@@ -12,8 +12,8 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "text", placeholder: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         try {
@@ -41,6 +41,7 @@ const handler = NextAuth({
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.role = user.role;
       }
       return token;
     },
@@ -50,6 +51,7 @@ const handler = NextAuth({
           email: token.email,
           name: token.name,
           image: token.image as string | null | undefined,
+          role: token.role,
         };
       }
       return session;
