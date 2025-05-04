@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useFormState } from "react-dom";
-import { registerUserAction } from "@/data/actions/auth-actions";
 
 import {
   CardTitle,
@@ -15,22 +13,38 @@ import {
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-
-const INITIAL_STATE = {
-  data: "hello",
-};
+import { useState } from "react";
 
 export function SignupForm() {
-  const [formState, formAction] = useFormState(
-    registerUserAction,
-    INITIAL_STATE
-  );
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  })
+  const [pending, setPending] = useState(false)
 
-  console.log(formState, "client");
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setPending(true)
+
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+    if (res.ok) {
+      setPending(false);
+
+      const data = await res.json();
+    }
+  }
 
   return (
     <div className="w-full max-w-md">
-      <form action={formAction}>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <Card>
           <CardHeader className="flex flex-col items-center justify-center space-y-1">
             <CardTitle className="text-3xl font-bold">
@@ -48,6 +62,9 @@ export function SignupForm() {
                 name="username"
                 type="text"
                 placeholder="username"
+                disabled={pending}
+                value={form.username}
+                onChange={(e) => setForm({ ...form, username: e.target.value })}
               />
             </div>
             <div className="space-y-2">
@@ -57,6 +74,9 @@ export function SignupForm() {
                 name="email"
                 type="email"
                 placeholder="name@example.com"
+                disabled={pending}
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
             </div>
 
@@ -67,6 +87,9 @@ export function SignupForm() {
                 name="password"
                 type="password"
                 placeholder="password"
+                disabled={pending}
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </div>
             <div className="space-y-2">
@@ -76,11 +99,16 @@ export function SignupForm() {
                 name="confirmPassword"
                 type="password"
                 placeholder="confirm password"
+                disabled={pending}
+                value={form.confirmPassword}
+                onChange={(e) =>
+                  setForm({ ...form, confirmPassword: e.target.value })
+                }
               />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <button type="submit" className="w-full">
+            <button type="submit" className="w-full" disabled={pending}>
               Sign Up
             </button>
           </CardFooter>
