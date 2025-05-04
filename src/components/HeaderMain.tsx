@@ -29,7 +29,7 @@ const HeaderMain = () => {
 
           {/* Sign In Button */}
           <div className="hidden lg:flex">
-            <Link href="#">
+            <Link href="/signin">
               <button className="bg-[#1CA8C3] text-white font-semibold text-sm px-6 py-2 rounded-full shadow transition">
                 SIGN IN
               </button>
