@@ -13,11 +13,41 @@ import {
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { TriangleAlert } from "lucide-react";
 
 export function SigninForm() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [pending, setPending] = useState(false);
+  const router = useRouter();
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPending(true);
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+    if (res?.ok) {
+      router.push("/dashboard");
+      toast.success("Login Berhasil");
+    } else if (res?.error) {
+      setError("Invalid credentials");
+      setPending(false);
+    } else {
+      setError("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <div className="w-full max-w-md">
-      <form>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <Card>
           <CardHeader className="flex flex-col items-center justify-center space-y-1">
             <CardTitle className="text-3xl font-bold">
@@ -27,6 +57,12 @@ export function SigninForm() {
               Masuk untuk melanjutkan pembelajaran interaktif Anda
             </CardDescription>
           </CardHeader>
+          {!!error && (
+            <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-4">
+              <TriangleAlert />
+              <p>{error}</p>
+            </div>
+          )}
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -37,6 +73,9 @@ export function SigninForm() {
                   type="text"
                   placeholder="username or email"
                   className="pr-10"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={pending}
                 />
                 <span className="absolute inset-y-0 right-3 flex items-center text-gray-400">
                   {/* Replace with your icon */}
@@ -64,11 +103,16 @@ export function SigninForm() {
                 name="password"
                 type="password"
                 placeholder="password"
+                disabled={pending}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <button className="w-full">Sign In</button>
+            <button className="w-full" disabled={pending}>
+              Sign In
+            </button>
           </CardFooter>
         </Card>
         <div className="mt-4 text-center text-sm">

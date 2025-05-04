@@ -14,6 +14,9 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { TriangleAlert } from "lucide-react";
 
 export function SignupForm() {
   const [form, setForm] = useState({
@@ -21,12 +24,14 @@ export function SignupForm() {
     email: "",
     password: "",
     confirmPassword: "",
-  })
-  const [pending, setPending] = useState(false)
+  });
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setPending(true)
+    e.preventDefault();
+    setPending(true);
 
     const res = await fetch("/api/auth/signup", {
       method: "POST",
@@ -35,12 +40,20 @@ export function SignupForm() {
       },
       body: JSON.stringify(form),
     });
+    const data = await res.json();
+
     if (res.ok) {
       setPending(false);
-
-      const data = await res.json();
+      toast.success(data.message);
+      router.push("/signin");
+    } else if (res.status === 400) {
+      setError(data.message);
+      setPending(false);
+    } else if (res.status === 500) {
+      setError(data.message);
+      setPending(false);
     }
-  }
+  };
 
   return (
     <div className="w-full max-w-md">
@@ -54,6 +67,12 @@ export function SignupForm() {
               Masuk untuk melanjutkan pemantauan pembelajaran Anda
             </CardDescription>
           </CardHeader>
+          {!!error && (
+            <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-4">
+              <TriangleAlert />
+              <p>{error}</p>
+            </div>
+          )}
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username">Username</Label>
