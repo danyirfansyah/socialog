@@ -13,6 +13,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // Define course type
 type Course = {
@@ -26,6 +27,8 @@ export default function MateriPPKN() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -57,6 +60,12 @@ export default function MateriPPKN() {
 
       <Navbar />
       <main className="flex flex-col items-center min-h-screen p-4 bg-gray-100">
+        <button
+          onClick={() => router.back()}
+          className="self-start mt-4 mb-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition ml-4"
+        >
+          ← Kembali
+        </button>
         <h1 className="text-3xl font-bold text-center">Materi PPKN</h1>
 
         <section className="mt-8 w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

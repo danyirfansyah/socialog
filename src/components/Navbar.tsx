@@ -24,7 +24,7 @@ export default function Navbar() {
             <Link href="/dashboard">
               <span className="hover:text-teal-600 transition">HOME</span>
             </Link>
-            <Link href="#">
+            <Link href="/belajar">
               <span className="hover:text-teal-600 transition">BELAJAR</span>
             </Link>
             <Link href="#">
