@@ -1,0 +1,47 @@
+[
+  { "id": "1", "title": "Dinamika Kependudukan Indonesia", "category": "IPS" },
+  { "id": "2", "title": "Globalisasi dan Dampaknya", "category": "IPS" },
+  { "id": "3", "title": "Perkembangan Ekonomi Indonesia", "category": "IPS" },
+  { "id": "4", "title": "Sistem Pemerintahan Indonesia", "category": "IPS" },
+  {
+    "id": "5",
+    "title": "Keragaman Sosial Budaya Indonesia",
+    "category": "IPS"
+  },
+  { "id": "6", "title": "Geografi Indonesia", "category": "IPS" },
+  {
+    "id": "7",
+    "title": "Interaksi Sosial dan Perubahan Sosial",
+    "category": "IPS"
+  },
+  {
+    "id": "8",
+    "title": "Dinamika Perwujudan Pancasila sebagai Dasar Negara dan Pandangan Hidup Bangsa",
+    "category": "PPKN"
+  },
+  {
+    "id": "9",
+    "title": "Pembukaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945",
+    "category": "PPKN"
+  },
+  {
+    "id": "10",
+    "title": "Kedaulatan Negara Kesatuan Republik Indonesia",
+    "category": "PPKN"
+  },
+  {
+    "id": "11",
+    "title": "Keberagaman Masyarakat Indonesia dalam Bingkai Bhinneka Tunggal Ika",
+    "category": "PPKN"
+  },
+  {
+    "id": "12",
+    "title": "Harmoni Keberagaman Masyarakat Indonesia",
+    "category": "PPKN"
+  },
+  {
+    "id": "13",
+    "title": "Bela Negara dalam Konteks Negara Kesatuan Republik Indonesia",
+    "category": "PPKN"
+  }
+]

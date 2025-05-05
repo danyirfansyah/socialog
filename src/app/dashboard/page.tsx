@@ -81,8 +81,8 @@ export default function Dashboard() {
 
         {/* Box Grid Section */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <BoxCard href="/profile" title="IPS" />
-          <BoxCard href="/settings" title="PPKn" />
+          <BoxCard href="/materi/ips" title="IPS" />
+          <BoxCard href="/materi/ppkn" title="PPKn" />
         </div>
       </main>
 

@@ -21,7 +21,7 @@ export default function Navbar() {
 
           {/* Navigation Menu */}
           <div className="hidden lg:flex justify-center flex-1 gap-6 font-medium text-black">
-            <Link href="#">
+            <Link href="/dashboard">
               <span className="hover:text-teal-600 transition">HOME</span>
             </Link>
             <Link href="#">
