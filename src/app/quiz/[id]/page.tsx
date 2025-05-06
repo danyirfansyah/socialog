@@ -1,16 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 import { Progress } from "@/components/ui/progress";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
-import { useSession } from "next-auth/react";
+
+import QuizNavigation from "@/components/quiz/QuizNavigation";
+import QuestionCard from "@/components/quiz/QuestionCard";
+import QuizResult from "@/components/quiz/QuizResult";
+import { useQuizId } from "@/utils/useQuizId";
+import { saveQuizResult } from "@/utils/saveQuizResult";
 
 interface Question {
   question: string;
@@ -21,24 +23,24 @@ interface Question {
 export default function Quiz() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [current, setCurrent] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showResult, setShowResult] = useState(false);
-  const [answered, setAnswered] = useState(false);
   const [rawScore, setRawScore] = useState(0);
+  const [answered, setAnswered] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+
   const { data: session } = useSession();
-  const router = useRouter(); // Initialize useRouter
+  const quizId = useQuizId();
+  const finalScore = ((rawScore / questions.length) * 100).toFixed(2);
 
   useEffect(() => {
-    const quizId = window.location.pathname.split("/").pop();
+    if (!quizId) return;
     fetch(`/api/${quizId}/questions`)
       .then((res) => res.json())
       .then((data) => setQuestions(data));
-  }, []);
+  }, [quizId]);
 
   const handleAnswer = (selected: string) => {
     if (answered) return;
     setAnswered(true);
-
     if (selected === questions[current].answer) {
       setRawScore((prev) => prev + 1);
     }
@@ -53,39 +55,20 @@ export default function Quiz() {
     }, 600);
   };
 
-  const finalScore = ((rawScore / questions.length) * 100).toFixed(2);
-
   const restartQuiz = () => {
     setCurrent(0);
-    setScore(0);
+    setRawScore(0);
     setShowResult(false);
     setAnswered(false);
   };
 
-  const saveResult = async () => {
-    const userId = session?.user?.id;
-    const quizId = window.location.pathname.split("/").pop();
-
-    try {
-      await fetch("/api/results", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          quizId,
-          score: parseFloat(finalScore),
-        }),
-      });
-    } catch (error) {
-      console.error("Error saving quiz result:", error);
-    }
-  };
-
   useEffect(() => {
-    if (showResult) {
-      saveResult();
+    if (showResult && session?.user?.id && quizId) {
+      saveQuizResult({
+        userId: session.user.id,
+        quizId,
+        score: parseFloat(finalScore),
+      });
     }
   }, [showResult]);
 
@@ -95,13 +78,7 @@ export default function Quiz() {
     <div>
       <Navbar />
       <div className="max-w-2xl mx-auto mt-10 px-4">
-        <Button
-          onClick={() => router.back()} // Go back to the previous page
-          variant="outline"
-          className="mb-4"
-        >
-          Go Back
-        </Button>
+        <QuizNavigation />
         <Card className="shadow-xl">
           <CardHeader>
             <CardTitle className="text-xl">
@@ -119,42 +96,15 @@ export default function Quiz() {
           <Separator />
           <CardContent className="pt-4 pb-6">
             {showResult ? (
-              <Alert className="text-center">
-                <AlertTitle className="text-2xl font-semibold mb-2">
-                  Quiz Completed!
-                </AlertTitle>
-                <AlertDescription className="text-lg">
-                  Your Score:{" "}
-                  <span className="font-bold">{finalScore} / 100</span>
-                </AlertDescription>
-                <Button className="mt-4" onClick={restartQuiz}>
-                  Retake Quiz
-                </Button>
-              </Alert>
+              <QuizResult score={finalScore} onRetry={restartQuiz} />
             ) : (
-              <div>
-                <h3 className="text-lg font-medium mb-4">
-                  {questions[current].question}
-                </h3>
-                <div className="flex flex-col gap-3">
-                  {questions[current].options.map((opt, i) => (
-                    <Button
-                      key={i}
-                      onClick={() => handleAnswer(opt)}
-                      variant="outline"
-                      disabled={answered}
-                      className="justify-start"
-                    >
-                      {opt}
-                    </Button>
-                  ))}
-                </div>
-                <div className="mt-4">
-                  <Badge variant="secondary">
-                    Correct Answer: {answered ? questions[current].answer : "?"}
-                  </Badge>
-                </div>
-              </div>
+              <QuestionCard
+                question={questions[current].question}
+                options={questions[current].options}
+                correctAnswer={questions[current].answer}
+                onAnswer={handleAnswer}
+                answered={answered}
+              />
             )}
           </CardContent>
         </Card>
