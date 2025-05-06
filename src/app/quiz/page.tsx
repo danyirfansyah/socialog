@@ -9,6 +9,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import QuizCard from "@/components/quiz/QuizCard";
 import CategorySelect from "@/components/quiz/CategorySelect";
 import { useSession } from "next-auth/react";
+import HistoryCard from "@/components/quiz/HistoryCard";
+import HistorySection from "@/components/quiz/HistorySection";
+import QuizGrid from "@/components/quiz/QuizGrid";
 
 type Quiz = {
   id: string;
@@ -24,30 +27,51 @@ export default function QuizSelectionPage() {
   const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("semua");
   const { data: session } = useSession();
+  const [history, setHistory] = useState<
+    { id: string; quizId: string; score: number; createdAt: string }[]
+  >([]);
+  const [courseMap, setCourseMap] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const fetchQuizzes = async () => {
+    const fetchData = async () => {
       try {
+        setLoading(true);
+
         const res = await fetch("/api/courses");
         if (!res.ok) throw new Error("Gagal memuat data kuis");
-        const data: Quiz[] = await res.json();
+        const courseData: Quiz[] = await res.json();
 
-        // Fetch grades for each quiz
-        const quizzesWithGrades = await Promise.all(
-          data.map(async (quiz) => {
-            if (session?.user?.id) {
+        const courseMapData: Record<string, string> = {};
+        courseData.forEach((course) => {
+          courseMapData[course.id] = course.title;
+        });
+        setCourseMap(courseMapData);
+
+        if (session?.user?.id) {
+          const historyRes = await fetch(
+            `/api/history?userId=${session.user.id}`
+          );
+          const historyData = await historyRes.json();
+
+          // Sort by date DESC
+          const sortedHistory = historyData.sort(
+            (a: any, b: any) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+          setHistory(sortedHistory);
+
+          // Also load quiz data with grades
+          const quizzesWithGrades = await Promise.all(
+            courseData.map(async (quiz) => {
               const gradeRes = await fetch(
                 `/api/results?quizId=${quiz.id}&userId=${session?.user?.id}`
               );
               const gradeData = await gradeRes.json();
-
               return { ...quiz, grade: gradeData.grade ?? undefined };
-            }
-            return { ...quiz, grade: undefined };
-          })
-        );
-
-        setQuizzes(quizzesWithGrades);
+            })
+          );
+          setQuizzes(quizzesWithGrades);
+        }
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -55,7 +79,7 @@ export default function QuizSelectionPage() {
       }
     };
 
-    fetchQuizzes();
+    fetchData();
   }, [session]);
 
   const filteredQuizzes = quizzes.filter((quiz) =>
@@ -74,7 +98,11 @@ export default function QuizSelectionPage() {
       <Navbar />
 
       <main className="flex flex-col items-center min-h-screen p-4 bg-gray-100">
-        <h1 className="text-3xl font-bold text-center mb-4">Pilih Kuis</h1>
+        <h1 className="text-3xl font-bold text-center mb-4">
+          Pilih Latihan Soal
+        </h1>
+
+        {!loading && <HistorySection history={history} courseMap={courseMap} />}
 
         <div className="w-full max-w-6xl mb-6">
           <CategorySelect
@@ -84,26 +112,7 @@ export default function QuizSelectionPage() {
         </div>
 
         <section className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {loading &&
-            [...Array(6)].map((_, i) => (
-              <Skeleton key={i} className="h-36 w-full rounded-xl" />
-            ))}
-
-          {error && (
-            <p className="text-red-500 text-center col-span-full">
-              {error || "Terjadi kesalahan saat memuat data kuis."}
-            </p>
-          )}
-
-          {!loading && !error && filteredQuizzes.length === 0 && (
-            <p className="text-gray-600 text-center col-span-full">
-              Tidak ada kuis yang tersedia.
-            </p>
-          )}
-
-          {!loading &&
-            !error &&
-            filteredQuizzes.map((quiz) => <QuizCard key={quiz.id} {...quiz} />)}
+          <QuizGrid loading={loading} error={error} quizzes={filteredQuizzes} />
         </section>
       </main>
 
