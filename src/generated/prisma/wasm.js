@@ -121,6 +121,14 @@ exports.Prisma.QuestionScalarFieldEnum = {
   answer: 'answer'
 };
 
+exports.Prisma.QuizResultScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  quizId: 'quizId',
+  score: 'score',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -133,7 +141,8 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Question: 'Question'
+  Question: 'Question',
+  QuizResult: 'QuizResult'
 };
 
 /**

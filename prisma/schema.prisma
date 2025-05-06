@@ -21,3 +21,11 @@ model Question {
   options   String[]
   answer    String
 }
+
+model QuizResult {
+  id        String   @id @default(uuid()) @map("_id")
+  userId    String
+  quizId    String
+  score     Float
+  createdAt DateTime @default(now())
+}

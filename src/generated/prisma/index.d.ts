@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type Question = $Result.DefaultSelection<Prisma.$QuestionPayload>
+/**
+ * Model QuizResult
+ * 
+ */
+export type QuizResult = $Result.DefaultSelection<Prisma.$QuizResultPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -120,6 +125,16 @@ export class PrismaClient<
     * ```
     */
   get question(): Prisma.QuestionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.quizResult`: Exposes CRUD operations for the **QuizResult** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QuizResults
+    * const quizResults = await prisma.quizResult.findMany()
+    * ```
+    */
+  get quizResult(): Prisma.QuizResultDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -560,7 +575,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Question: 'Question'
+    Question: 'Question',
+    QuizResult: 'QuizResult'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -579,7 +595,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "question"
+      modelProps: "question" | "quizResult"
       txIsolationLevel: never
     }
     model: {
@@ -657,6 +673,80 @@ export namespace Prisma {
           }
         }
       }
+      QuizResult: {
+        payload: Prisma.$QuizResultPayload<ExtArgs>
+        fields: Prisma.QuizResultFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QuizResultFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QuizResultFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload>
+          }
+          findFirst: {
+            args: Prisma.QuizResultFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QuizResultFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload>
+          }
+          findMany: {
+            args: Prisma.QuizResultFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload>[]
+          }
+          create: {
+            args: Prisma.QuizResultCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload>
+          }
+          createMany: {
+            args: Prisma.QuizResultCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.QuizResultDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload>
+          }
+          update: {
+            args: Prisma.QuizResultUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload>
+          }
+          deleteMany: {
+            args: Prisma.QuizResultDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QuizResultUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.QuizResultUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuizResultPayload>
+          }
+          aggregate: {
+            args: Prisma.QuizResultAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuizResult>
+          }
+          groupBy: {
+            args: Prisma.QuizResultGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuizResultGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.QuizResultFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.QuizResultAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.QuizResultCountArgs<ExtArgs>
+            result: $Utils.Optional<QuizResultCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -729,6 +819,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     question?: QuestionOmit
+    quizResult?: QuizResultOmit
   }
 
   /* Types for Logging */
@@ -1752,6 +1843,972 @@ export namespace Prisma {
 
 
   /**
+   * Model QuizResult
+   */
+
+  export type AggregateQuizResult = {
+    _count: QuizResultCountAggregateOutputType | null
+    _avg: QuizResultAvgAggregateOutputType | null
+    _sum: QuizResultSumAggregateOutputType | null
+    _min: QuizResultMinAggregateOutputType | null
+    _max: QuizResultMaxAggregateOutputType | null
+  }
+
+  export type QuizResultAvgAggregateOutputType = {
+    score: number | null
+  }
+
+  export type QuizResultSumAggregateOutputType = {
+    score: number | null
+  }
+
+  export type QuizResultMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    quizId: string | null
+    score: number | null
+    createdAt: Date | null
+  }
+
+  export type QuizResultMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    quizId: string | null
+    score: number | null
+    createdAt: Date | null
+  }
+
+  export type QuizResultCountAggregateOutputType = {
+    id: number
+    userId: number
+    quizId: number
+    score: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type QuizResultAvgAggregateInputType = {
+    score?: true
+  }
+
+  export type QuizResultSumAggregateInputType = {
+    score?: true
+  }
+
+  export type QuizResultMinAggregateInputType = {
+    id?: true
+    userId?: true
+    quizId?: true
+    score?: true
+    createdAt?: true
+  }
+
+  export type QuizResultMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    quizId?: true
+    score?: true
+    createdAt?: true
+  }
+
+  export type QuizResultCountAggregateInputType = {
+    id?: true
+    userId?: true
+    quizId?: true
+    score?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type QuizResultAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuizResult to aggregate.
+     */
+    where?: QuizResultWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuizResults to fetch.
+     */
+    orderBy?: QuizResultOrderByWithRelationInput | QuizResultOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QuizResultWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuizResults from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuizResults.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned QuizResults
+    **/
+    _count?: true | QuizResultCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QuizResultAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QuizResultSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuizResultMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuizResultMaxAggregateInputType
+  }
+
+  export type GetQuizResultAggregateType<T extends QuizResultAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuizResult]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuizResult[P]>
+      : GetScalarType<T[P], AggregateQuizResult[P]>
+  }
+
+
+
+
+  export type QuizResultGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuizResultWhereInput
+    orderBy?: QuizResultOrderByWithAggregationInput | QuizResultOrderByWithAggregationInput[]
+    by: QuizResultScalarFieldEnum[] | QuizResultScalarFieldEnum
+    having?: QuizResultScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuizResultCountAggregateInputType | true
+    _avg?: QuizResultAvgAggregateInputType
+    _sum?: QuizResultSumAggregateInputType
+    _min?: QuizResultMinAggregateInputType
+    _max?: QuizResultMaxAggregateInputType
+  }
+
+  export type QuizResultGroupByOutputType = {
+    id: string
+    userId: string
+    quizId: string
+    score: number
+    createdAt: Date
+    _count: QuizResultCountAggregateOutputType | null
+    _avg: QuizResultAvgAggregateOutputType | null
+    _sum: QuizResultSumAggregateOutputType | null
+    _min: QuizResultMinAggregateOutputType | null
+    _max: QuizResultMaxAggregateOutputType | null
+  }
+
+  type GetQuizResultGroupByPayload<T extends QuizResultGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuizResultGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuizResultGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuizResultGroupByOutputType[P]>
+            : GetScalarType<T[P], QuizResultGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QuizResultSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    quizId?: boolean
+    score?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["quizResult"]>
+
+
+
+  export type QuizResultSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    quizId?: boolean
+    score?: boolean
+    createdAt?: boolean
+  }
+
+  export type QuizResultOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "quizId" | "score" | "createdAt", ExtArgs["result"]["quizResult"]>
+
+  export type $QuizResultPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "QuizResult"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      quizId: string
+      score: number
+      createdAt: Date
+    }, ExtArgs["result"]["quizResult"]>
+    composites: {}
+  }
+
+  type QuizResultGetPayload<S extends boolean | null | undefined | QuizResultDefaultArgs> = $Result.GetResult<Prisma.$QuizResultPayload, S>
+
+  type QuizResultCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QuizResultFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuizResultCountAggregateInputType | true
+    }
+
+  export interface QuizResultDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['QuizResult'], meta: { name: 'QuizResult' } }
+    /**
+     * Find zero or one QuizResult that matches the filter.
+     * @param {QuizResultFindUniqueArgs} args - Arguments to find a QuizResult
+     * @example
+     * // Get one QuizResult
+     * const quizResult = await prisma.quizResult.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QuizResultFindUniqueArgs>(args: SelectSubset<T, QuizResultFindUniqueArgs<ExtArgs>>): Prisma__QuizResultClient<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QuizResult that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QuizResultFindUniqueOrThrowArgs} args - Arguments to find a QuizResult
+     * @example
+     * // Get one QuizResult
+     * const quizResult = await prisma.quizResult.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QuizResultFindUniqueOrThrowArgs>(args: SelectSubset<T, QuizResultFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QuizResultClient<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuizResult that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuizResultFindFirstArgs} args - Arguments to find a QuizResult
+     * @example
+     * // Get one QuizResult
+     * const quizResult = await prisma.quizResult.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QuizResultFindFirstArgs>(args?: SelectSubset<T, QuizResultFindFirstArgs<ExtArgs>>): Prisma__QuizResultClient<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuizResult that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuizResultFindFirstOrThrowArgs} args - Arguments to find a QuizResult
+     * @example
+     * // Get one QuizResult
+     * const quizResult = await prisma.quizResult.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QuizResultFindFirstOrThrowArgs>(args?: SelectSubset<T, QuizResultFindFirstOrThrowArgs<ExtArgs>>): Prisma__QuizResultClient<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QuizResults that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuizResultFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QuizResults
+     * const quizResults = await prisma.quizResult.findMany()
+     * 
+     * // Get first 10 QuizResults
+     * const quizResults = await prisma.quizResult.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const quizResultWithIdOnly = await prisma.quizResult.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QuizResultFindManyArgs>(args?: SelectSubset<T, QuizResultFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QuizResult.
+     * @param {QuizResultCreateArgs} args - Arguments to create a QuizResult.
+     * @example
+     * // Create one QuizResult
+     * const QuizResult = await prisma.quizResult.create({
+     *   data: {
+     *     // ... data to create a QuizResult
+     *   }
+     * })
+     * 
+     */
+    create<T extends QuizResultCreateArgs>(args: SelectSubset<T, QuizResultCreateArgs<ExtArgs>>): Prisma__QuizResultClient<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QuizResults.
+     * @param {QuizResultCreateManyArgs} args - Arguments to create many QuizResults.
+     * @example
+     * // Create many QuizResults
+     * const quizResult = await prisma.quizResult.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QuizResultCreateManyArgs>(args?: SelectSubset<T, QuizResultCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a QuizResult.
+     * @param {QuizResultDeleteArgs} args - Arguments to delete one QuizResult.
+     * @example
+     * // Delete one QuizResult
+     * const QuizResult = await prisma.quizResult.delete({
+     *   where: {
+     *     // ... filter to delete one QuizResult
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QuizResultDeleteArgs>(args: SelectSubset<T, QuizResultDeleteArgs<ExtArgs>>): Prisma__QuizResultClient<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QuizResult.
+     * @param {QuizResultUpdateArgs} args - Arguments to update one QuizResult.
+     * @example
+     * // Update one QuizResult
+     * const quizResult = await prisma.quizResult.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QuizResultUpdateArgs>(args: SelectSubset<T, QuizResultUpdateArgs<ExtArgs>>): Prisma__QuizResultClient<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QuizResults.
+     * @param {QuizResultDeleteManyArgs} args - Arguments to filter QuizResults to delete.
+     * @example
+     * // Delete a few QuizResults
+     * const { count } = await prisma.quizResult.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QuizResultDeleteManyArgs>(args?: SelectSubset<T, QuizResultDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuizResults.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuizResultUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QuizResults
+     * const quizResult = await prisma.quizResult.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QuizResultUpdateManyArgs>(args: SelectSubset<T, QuizResultUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one QuizResult.
+     * @param {QuizResultUpsertArgs} args - Arguments to update or create a QuizResult.
+     * @example
+     * // Update or create a QuizResult
+     * const quizResult = await prisma.quizResult.upsert({
+     *   create: {
+     *     // ... data to create a QuizResult
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QuizResult we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QuizResultUpsertArgs>(args: SelectSubset<T, QuizResultUpsertArgs<ExtArgs>>): Prisma__QuizResultClient<$Result.GetResult<Prisma.$QuizResultPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QuizResults that matches the filter.
+     * @param {QuizResultFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const quizResult = await prisma.quizResult.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: QuizResultFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a QuizResult.
+     * @param {QuizResultAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const quizResult = await prisma.quizResult.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: QuizResultAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of QuizResults.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuizResultCountArgs} args - Arguments to filter QuizResults to count.
+     * @example
+     * // Count the number of QuizResults
+     * const count = await prisma.quizResult.count({
+     *   where: {
+     *     // ... the filter for the QuizResults we want to count
+     *   }
+     * })
+    **/
+    count<T extends QuizResultCountArgs>(
+      args?: Subset<T, QuizResultCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuizResultCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QuizResult.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuizResultAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuizResultAggregateArgs>(args: Subset<T, QuizResultAggregateArgs>): Prisma.PrismaPromise<GetQuizResultAggregateType<T>>
+
+    /**
+     * Group by QuizResult.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuizResultGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QuizResultGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QuizResultGroupByArgs['orderBy'] }
+        : { orderBy?: QuizResultGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QuizResultGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuizResultGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the QuizResult model
+   */
+  readonly fields: QuizResultFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for QuizResult.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QuizResultClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the QuizResult model
+   */
+  interface QuizResultFieldRefs {
+    readonly id: FieldRef<"QuizResult", 'String'>
+    readonly userId: FieldRef<"QuizResult", 'String'>
+    readonly quizId: FieldRef<"QuizResult", 'String'>
+    readonly score: FieldRef<"QuizResult", 'Float'>
+    readonly createdAt: FieldRef<"QuizResult", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * QuizResult findUnique
+   */
+  export type QuizResultFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * Filter, which QuizResult to fetch.
+     */
+    where: QuizResultWhereUniqueInput
+  }
+
+  /**
+   * QuizResult findUniqueOrThrow
+   */
+  export type QuizResultFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * Filter, which QuizResult to fetch.
+     */
+    where: QuizResultWhereUniqueInput
+  }
+
+  /**
+   * QuizResult findFirst
+   */
+  export type QuizResultFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * Filter, which QuizResult to fetch.
+     */
+    where?: QuizResultWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuizResults to fetch.
+     */
+    orderBy?: QuizResultOrderByWithRelationInput | QuizResultOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuizResults.
+     */
+    cursor?: QuizResultWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuizResults from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuizResults.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuizResults.
+     */
+    distinct?: QuizResultScalarFieldEnum | QuizResultScalarFieldEnum[]
+  }
+
+  /**
+   * QuizResult findFirstOrThrow
+   */
+  export type QuizResultFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * Filter, which QuizResult to fetch.
+     */
+    where?: QuizResultWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuizResults to fetch.
+     */
+    orderBy?: QuizResultOrderByWithRelationInput | QuizResultOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuizResults.
+     */
+    cursor?: QuizResultWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuizResults from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuizResults.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuizResults.
+     */
+    distinct?: QuizResultScalarFieldEnum | QuizResultScalarFieldEnum[]
+  }
+
+  /**
+   * QuizResult findMany
+   */
+  export type QuizResultFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * Filter, which QuizResults to fetch.
+     */
+    where?: QuizResultWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuizResults to fetch.
+     */
+    orderBy?: QuizResultOrderByWithRelationInput | QuizResultOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing QuizResults.
+     */
+    cursor?: QuizResultWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuizResults from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuizResults.
+     */
+    skip?: number
+    distinct?: QuizResultScalarFieldEnum | QuizResultScalarFieldEnum[]
+  }
+
+  /**
+   * QuizResult create
+   */
+  export type QuizResultCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * The data needed to create a QuizResult.
+     */
+    data: XOR<QuizResultCreateInput, QuizResultUncheckedCreateInput>
+  }
+
+  /**
+   * QuizResult createMany
+   */
+  export type QuizResultCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many QuizResults.
+     */
+    data: QuizResultCreateManyInput | QuizResultCreateManyInput[]
+  }
+
+  /**
+   * QuizResult update
+   */
+  export type QuizResultUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * The data needed to update a QuizResult.
+     */
+    data: XOR<QuizResultUpdateInput, QuizResultUncheckedUpdateInput>
+    /**
+     * Choose, which QuizResult to update.
+     */
+    where: QuizResultWhereUniqueInput
+  }
+
+  /**
+   * QuizResult updateMany
+   */
+  export type QuizResultUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update QuizResults.
+     */
+    data: XOR<QuizResultUpdateManyMutationInput, QuizResultUncheckedUpdateManyInput>
+    /**
+     * Filter which QuizResults to update
+     */
+    where?: QuizResultWhereInput
+    /**
+     * Limit how many QuizResults to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuizResult upsert
+   */
+  export type QuizResultUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * The filter to search for the QuizResult to update in case it exists.
+     */
+    where: QuizResultWhereUniqueInput
+    /**
+     * In case the QuizResult found by the `where` argument doesn't exist, create a new QuizResult with this data.
+     */
+    create: XOR<QuizResultCreateInput, QuizResultUncheckedCreateInput>
+    /**
+     * In case the QuizResult was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QuizResultUpdateInput, QuizResultUncheckedUpdateInput>
+  }
+
+  /**
+   * QuizResult delete
+   */
+  export type QuizResultDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+    /**
+     * Filter which QuizResult to delete.
+     */
+    where: QuizResultWhereUniqueInput
+  }
+
+  /**
+   * QuizResult deleteMany
+   */
+  export type QuizResultDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuizResults to delete
+     */
+    where?: QuizResultWhereInput
+    /**
+     * Limit how many QuizResults to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuizResult findRaw
+   */
+  export type QuizResultFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * QuizResult aggregateRaw
+   */
+  export type QuizResultAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * QuizResult without action
+   */
+  export type QuizResultDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuizResult
+     */
+    select?: QuizResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuizResult
+     */
+    omit?: QuizResultOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1764,6 +2821,17 @@ export namespace Prisma {
   };
 
   export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typeof QuestionScalarFieldEnum]
+
+
+  export const QuizResultScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    quizId: 'quizId',
+    score: 'score',
+    createdAt: 'createdAt'
+  };
+
+  export type QuizResultScalarFieldEnum = (typeof QuizResultScalarFieldEnum)[keyof typeof QuizResultScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1798,6 +2866,34 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -1870,6 +2966,60 @@ export namespace Prisma {
     answer?: StringWithAggregatesFilter<"Question"> | string
   }
 
+  export type QuizResultWhereInput = {
+    AND?: QuizResultWhereInput | QuizResultWhereInput[]
+    OR?: QuizResultWhereInput[]
+    NOT?: QuizResultWhereInput | QuizResultWhereInput[]
+    id?: StringFilter<"QuizResult"> | string
+    userId?: StringFilter<"QuizResult"> | string
+    quizId?: StringFilter<"QuizResult"> | string
+    score?: FloatFilter<"QuizResult"> | number
+    createdAt?: DateTimeFilter<"QuizResult"> | Date | string
+  }
+
+  export type QuizResultOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type QuizResultWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: QuizResultWhereInput | QuizResultWhereInput[]
+    OR?: QuizResultWhereInput[]
+    NOT?: QuizResultWhereInput | QuizResultWhereInput[]
+    userId?: StringFilter<"QuizResult"> | string
+    quizId?: StringFilter<"QuizResult"> | string
+    score?: FloatFilter<"QuizResult"> | number
+    createdAt?: DateTimeFilter<"QuizResult"> | Date | string
+  }, "id">
+
+  export type QuizResultOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+    _count?: QuizResultCountOrderByAggregateInput
+    _avg?: QuizResultAvgOrderByAggregateInput
+    _max?: QuizResultMaxOrderByAggregateInput
+    _min?: QuizResultMinOrderByAggregateInput
+    _sum?: QuizResultSumOrderByAggregateInput
+  }
+
+  export type QuizResultScalarWhereWithAggregatesInput = {
+    AND?: QuizResultScalarWhereWithAggregatesInput | QuizResultScalarWhereWithAggregatesInput[]
+    OR?: QuizResultScalarWhereWithAggregatesInput[]
+    NOT?: QuizResultScalarWhereWithAggregatesInput | QuizResultScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"QuizResult"> | string
+    userId?: StringWithAggregatesFilter<"QuizResult"> | string
+    quizId?: StringWithAggregatesFilter<"QuizResult"> | string
+    score?: FloatWithAggregatesFilter<"QuizResult"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"QuizResult"> | Date | string
+  }
+
   export type QuestionCreateInput = {
     id?: string
     quizId: string
@@ -1920,6 +3070,58 @@ export namespace Prisma {
     question?: StringFieldUpdateOperationsInput | string
     options?: QuestionUpdateoptionsInput | string[]
     answer?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type QuizResultCreateInput = {
+    id?: string
+    userId: string
+    quizId: string
+    score: number
+    createdAt?: Date | string
+  }
+
+  export type QuizResultUncheckedCreateInput = {
+    id?: string
+    userId: string
+    quizId: string
+    score: number
+    createdAt?: Date | string
+  }
+
+  export type QuizResultUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    score?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuizResultUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    score?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuizResultCreateManyInput = {
+    id?: string
+    userId: string
+    quizId: string
+    score: number
+    createdAt?: Date | string
+  }
+
+  export type QuizResultUpdateManyMutationInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    score?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuizResultUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    score?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -1985,6 +3187,90 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type QuizResultCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type QuizResultAvgOrderByAggregateInput = {
+    score?: SortOrder
+  }
+
+  export type QuizResultMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type QuizResultMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type QuizResultSumOrderByAggregateInput = {
+    score?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type QuestionCreateoptionsInput = {
     set: string[]
   }
@@ -1996,6 +3282,18 @@ export namespace Prisma {
   export type QuestionUpdateoptionsInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2038,6 +3336,58 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
 
