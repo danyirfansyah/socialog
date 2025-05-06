@@ -27,7 +27,7 @@ export default function Navbar() {
             <Link href="/belajar">
               <span className="hover:text-teal-600 transition">BELAJAR</span>
             </Link>
-            <Link href="#">
+            <Link href="/quiz">
               <span className="hover:text-teal-600 transition">LATIHAN</span>
             </Link>
           </div>
