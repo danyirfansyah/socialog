@@ -6,7 +6,7 @@ interface QuizResult {
 
 export async function saveQuizResult(result: QuizResult): Promise<void> {
   try {
-    const response = await fetch("/api/saveQuizResult", {
+    const response = await fetch("/api/results", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
