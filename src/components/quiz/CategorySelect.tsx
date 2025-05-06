@@ -25,7 +25,6 @@ export default function CategorySelect({
         <SelectItem value="semua">Semua</SelectItem>
         <SelectItem value="ips">IPS</SelectItem>
         <SelectItem value="ppkn">PPKN</SelectItem>
-        <SelectItem value="umum">Umum</SelectItem>
       </SelectContent>
     </Select>
   );
