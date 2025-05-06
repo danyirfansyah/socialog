@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "socialog",
-=======
-  "name": "socialog-pt",
->>>>>>> 20f610d35a2f26e801171d8093d5f3d7cbc7cade
   "version": "0.1.0",
   "private": true,
   "scripts": {
