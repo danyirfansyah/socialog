@@ -52,12 +52,7 @@ const UserButton = () => {
             >
               Profile
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => router.push("/settings")}
-              className="cursor-pointer"
-            >
-              Settings
-            </DropdownMenuItem>
+
             {session.user?.role === "admin" && (
               <DropdownMenuItem
                 onClick={() => router.push("/admin")}
