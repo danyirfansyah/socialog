@@ -77,7 +77,7 @@ export default function Quiz() {
   return (
     <div>
       <Navbar />
-      <div className="max-w-2xl mx-auto mt-10 px-4">
+      <div className="max-w-2xl mx-auto mt-10 px-4 mb-10">
         <QuizNavigation />
         <Card className="shadow-xl">
           <CardHeader>

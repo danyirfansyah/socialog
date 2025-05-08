@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     /* Footer with Full Blue Background */
-    <footer className="bg-[#1C3D5A] text-white py-10 mt-auto">
+    <footer className="bg-[#1C3D5A] text-white py-10 mt-auto font-afacad">
       <div className="container mx-auto flex justify-between items-center px-4">
         {/* Logo - Left Side */}
         <div className="flex items-center space-x-2">

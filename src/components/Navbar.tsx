@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <>
       {/* Navbar with Border */}
-      <header className="w-full bg-white shadow-sm py-4 border-b">
+      <header className="w-full bg-white shadow-sm py-4 border-b font-afacad">
         <div className="container mx-auto px-4 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
