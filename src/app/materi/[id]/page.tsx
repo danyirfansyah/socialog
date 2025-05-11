@@ -1,38 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
+import MateriBreadcrumb from "@/components/breadcrumbs/MateriBreadcrumb";
+import { useMateriDetail } from "@/utils/useMateriDetail";
 
-export default function MateriDetail() {
+export default function MateriDetailPage() {
   const { id } = useParams();
-  const [html, setHtml] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!id) return;
-
-    fetch(`/api/courses/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Materi tidak ditemukan");
-        return res.text();
-      })
-      .then(setHtml)
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [id]);
+  const { html, title, category, error, loading } = useMateriDetail(
+    id as string
+  );
 
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
+        <div className="w-full max-w-3xl mb-4">
+          <MateriBreadcrumb category={category} title={title} />
+        </div>
+
         {loading && <p>Loading...</p>}
         {error && <p className="text-red-500">{error}</p>}
         {!loading && !error && (
           <div
-            className="prose bg-white p-6 rounded shadow max-w-3xl w-full"
+            className="prose bg-white p-6 rounded shadow max-w-3xl w-full font-afacad"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         )}
