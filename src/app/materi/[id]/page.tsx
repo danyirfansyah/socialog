@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
 import MateriBreadcrumb from "@/components/breadcrumbs/MateriBreadcrumb";
 import { useMateriDetail } from "@/utils/useMateriDetail";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function MateriDetailPage() {
   const { id } = useParams();
@@ -29,6 +30,7 @@ export default function MateriDetailPage() {
           />
         )}
       </main>
+      <ScrollToTopButton />
       <Footer />
     </>
   );
