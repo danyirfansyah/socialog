@@ -17,7 +17,9 @@ export default function QuestionCard({
   answered,
 }: Props) {
   return (
-    <div>
+    <div className="max-w-xl w-full">
+      {" "}
+      {/* Optional container width control */}
       <h3 className="text-lg font-medium mb-4">{question}</h3>
       <div className="flex flex-col gap-3">
         {options.map((opt, i) => (
@@ -26,7 +28,7 @@ export default function QuestionCard({
             onClick={() => onAnswer(opt)}
             variant="outline"
             disabled={answered}
-            className="justify-start"
+            className="w-full max-w-full justify-start text-left break-words whitespace-normal h-auto min-h-[3rem]"
           >
             {opt}
           </Button>

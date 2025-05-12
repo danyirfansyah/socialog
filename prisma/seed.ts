@@ -2,72 +2,135 @@ import { PrismaClient } from "../src/generated/prisma";
 const prisma = new PrismaClient();
 
 async function main() {
+  // Insert new questions
   await prisma.question.createMany({
     data: [
       {
-        quizId: "2",
-        question: "What is the capital of France?",
-        answer: "Paris",
-        options: ["Berlin", "Madrid", "Paris", "Rome"],
+        quizId: "7",
+        question: "Apa yang dimaksud dengan interaksi sosial?",
+        answer: "Hubungan timbal balik antara individu dan kelompok",
+        options: [
+          "Hubungan antara kelompok dan kelompok",
+          "Hubungan antara individu dan individu",
+          "Hubungan antara individu dan lingkungan",
+          "Hubungan timbal balik antara individu dan kelompok",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is 2 + 2?",
-        answer: "4",
-        options: ["3", "4", "5", "6"],
+        quizId: "7",
+        question: "Apa saja bentuk interaksi manusia dengan lingkungan sosial?",
+        answer:
+          "Individu dengan individu, individu dengan kelompok, kelompok dengan kelompok",
+        options: [
+          "Individu dengan individu, individu dengan kelompok, kelompok dengan kelompok",
+          "Individu dengan alam, individu dengan budaya, individu dengan ekonomi",
+          "Kelompok dengan budaya, kelompok dengan ekonomi, kelompok dengan individu",
+          "Individu dengan individu, kelompok dengan ekonomi, kelompok dengan budaya",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is the largest planet in our solar system?",
-        answer: "Jupiter",
-        options: ["Earth", "Mars", "Jupiter", "Saturn"],
+        quizId: "7",
+        question: "Apa yang termasuk dalam lingkungan alam?",
+        answer: "Lingkungan biotik dan lingkungan abiotic",
+        options: [
+          "Lingkungan biotik dan lingkungan abiotic",
+          "Lingkungan biotik dan lingkungan ekonomi",
+          "Lingkungan biotik dan lingkungan sosial",
+          "Lingkungan sosial dan lingkungan budaya",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is the chemical symbol for gold?",
-        answer: "Au",
-        options: ["Ag", "Au", "Pb", "Fe"],
+        quizId: "7",
+        question: "Apa yang dimaksud dengan globalisasi?",
+        answer:
+          "Proses integrasi dan interaksi antara individu, perusahaan, dan negara",
+        options: [
+          "Proses pembangunan infrastruktur",
+          "Proses adaptasi budaya lokal",
+          "Proses integrasi dan interaksi antara individu, perusahaan, dan negara",
+          "Proses perubahan dalam struktur Masyarakat",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is the speed of light?",
-        answer: "299792458 m/s",
-        options: ["299792458 m/s", "300000 km/s", "150000 km/s", "100000 km/s"],
+        quizId: "7",
+        question:
+          "Apa dampak positif dari perubahan sosial pada masa Orde Baru?",
+        answer: "Menstabilkan kondisi politik",
+        options: [
+          "Kebebasan berpendapat",
+          "Menstabilkan kondisi politik",
+          "Pembangunan merata di seluruh Indonesia",
+          "Pemerintah bersifat desentralistik",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is the largest mammal?",
-        answer: "Blue Whale",
-        options: ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+        quizId: "7",
+        question: "Apa yang menjadi fokus utama pada masa reformasi?",
+        answer: "Pembatasan masa jabatan presiden",
+        options: [
+          "Program transmigrasi",
+          "Pembatasan masa jabatan presiden",
+          "Pembangunan infrastruktur",
+          "Kebijakan investasi",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is the boiling point of water?",
-        answer: "100°C",
-        options: ["0°C", "50°C", "100°C", "150°C"],
+        quizId: "7",
+        question: "Apa dampak negatif dari globalisasi?",
+        answer: "Lunturnya nilai-nilai budaya asli",
+        options: [
+          "Lunturnya nilai-nilai budaya asli",
+          "Peningkatan kualitas hidup",
+          "Berkembangnya ilmu pengetahuan",
+          "Masyarakat menjadi lebih terbuka",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is the smallest prime number?",
-        answer: "2",
-        options: ["0", "1", "2", "3"],
+        quizId: "7",
+        question:
+          "Apa yang dimaksud dengan interaksi manusia dengan lingkungan budaya?",
+        answer: "Adaptasi terhadap aturan dan norma",
+        options: [
+          "Kegiatan ekonomi sehari-hari",
+          "Adaptasi terhadap aturan dan norma",
+          "Hubungan dengan lingkungan alam",
+          "Interaksi sosial antar individu",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is the hardest natural substance on Earth?",
-        answer: "Diamond",
-        options: ["Gold", "Iron", "Diamond", "Graphite"],
+        quizId: "7",
+        question: "Apa yang menjadi ciri dari masa Orde Baru?",
+        answer: "Pemerintah bersifat sentralistik",
+        options: [
+          "Sistem pemerintahan desentralistik",
+          "Kebebasan berpendapat",
+          "Pemerintah bersifat sentralistik",
+          "Banyaknya partai politik baru",
+        ],
       },
       {
-        quizId: "2",
-        question: "What is the main ingredient in guacamole?",
-        answer: "Avocado",
-        options: ["Tomato", "Avocado", "Onion", "Pepper"],
+        quizId: "7",
+        question:
+          "Apa yang menjadi salah satu dampak negatif dari masa reformasi?",
+        answer: "Ketidakstabilan kondisi politik",
+        options: [
+          "Kebebasan berpendapat yang bertanggung jawab",
+          "Peningkatan kualitas hidup",
+          "Ketidakstabilan kondisi politik",
+          "Pembangunan infrastruktur yang merata",
+        ],
       },
     ],
   });
+
+  console.log("Inserted new questions");
 }
 
-main().finally(() => {
-  prisma.$disconnect();
-});
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(() => {
+    prisma.$disconnect();
+  });
