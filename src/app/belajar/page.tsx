@@ -3,14 +3,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Course } from "@/types/course";
 import {
   Select,
   SelectContent,
@@ -19,15 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Head from "next/head";
-import Link from "next/link";
-
-// Define course type
-type Course = {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-};
+import CourseCard from "@/components/CourseCard";
+import CourseSkeleton from "@/components/CourseSkeleton";
 
 export default function MateriAll() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -82,10 +68,7 @@ export default function MateriAll() {
         </div>
 
         <section className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {loading &&
-            [...Array(6)].map((_, i) => (
-              <Skeleton key={i} className="h-36 w-full rounded-xl" />
-            ))}
+          {loading && [...Array(6)].map((_, i) => <CourseSkeleton key={i} />)}
 
           {error && (
             <p className="text-red-500 text-center col-span-full">
@@ -102,24 +85,13 @@ export default function MateriAll() {
           {!loading &&
             !error &&
             filteredCourses.map((course) => (
-              <Link key={course.id} href={`/materi/${course.id}`} passHref>
-                <Card className="transition hover:shadow-lg hover:scale-[1.02] duration-200 cursor-pointer">
-                  <CardHeader>
-                    <CardTitle>{course.title}</CardTitle>
-                    <CardDescription className="line-clamp-2">
-                      {course.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-500 mb-2 capitalize">
-                      Kategori: {course.category}
-                    </p>
-                    <p className="text-sm text-blue-600 underline">
-                      Lihat Materi
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
+              <CourseCard
+                key={course.id}
+                id={course.id}
+                title={course.title}
+                description={course.description}
+                category={course.category}
+              />
             ))}
         </section>
       </main>
