@@ -23,7 +23,7 @@ export default function CourseCard({
 }: CourseCardProps) {
   return (
     <Link href={`/materi/${id}`}>
-      <Card className="transition hover:shadow-lg hover:scale-[1.02] duration-200 cursor-pointer">
+      <Card className="transition hover:shadow-lg hover:scale-[1.02] duration-200 cursor-pointer font-afacad">
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription className="line-clamp-2">

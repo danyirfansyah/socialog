@@ -97,7 +97,7 @@ export default function QuizSelectionPage() {
 
       <Navbar />
 
-      <main className="flex flex-col items-center min-h-screen p-4 bg-gray-100">
+      <main className="flex flex-col items-center min-h-screen p-4 bg-gray-100 font-afacad">
         <h1 className="text-3xl font-bold text-center mb-4">
           Pilih Latihan Soal
         </h1>

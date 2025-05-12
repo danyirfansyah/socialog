@@ -52,7 +52,7 @@ export default function MateriDetailPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
+      <main className="min-h-screen bg-gray-100 p-6 flex flex-col items-center font-afacad">
         <div className="w-full max-w-3xl mb-4">
           <MateriBreadcrumb category={category} title={title} />
         </div>
