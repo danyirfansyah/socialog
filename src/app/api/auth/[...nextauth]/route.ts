@@ -1,10 +1,14 @@
+// app/api/auth/[...nextauth]/route.ts
+
 import NextAuth from "next-auth";
 import User from "@/models/user";
 import connect from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+import { NextAuthOptions } from "next-auth";
+
+const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
@@ -62,5 +66,7 @@ const handler = NextAuth({
     signIn: "/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
-export { handler as GET, handler as POST };
+};
+
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST, authOptions };

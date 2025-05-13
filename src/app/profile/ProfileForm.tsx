@@ -18,13 +18,25 @@ export default function ProfileForm({ session }: { session: any }) {
         body: JSON.stringify({ name, email }),
       });
 
-      if (!res.ok) throw new Error("Failed to update profile");
+      if (!res.ok) {
+        let message = "Failed to update profile";
+        try {
+          const data = await res.json();
+          message = data?.message || message;
+        } catch (jsonError) {
+          console.warn("No JSON in error response");
+        }
+        throw new Error(message);
+      }
 
       alert("Profile updated successfully!");
       setEditing(false);
-    } catch (error) {
+
+      // Optional: refresh the session or the page
+      // location.reload();
+    } catch (error: any) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile.");
+      alert(error.message || "Failed to update profile.");
     }
   };
 
