@@ -6,118 +6,120 @@ async function main() {
   await prisma.question.createMany({
     data: [
       {
-        quizId: "7",
-        question: "Apa yang dimaksud dengan interaksi sosial?",
-        answer: "Hubungan timbal balik antara individu dan kelompok",
+        quizId: "13",
+        question:
+          "Setiap Warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara. Hal ini sesuai dengan UUD 1945 pasal ....",
+        answer: "27 ayat 3",
+        options: ["27 ayat 3", "28 ayat 1", "29 ayat 2", "27 ayat 1"],
+      },
+      {
+        quizId: "13",
+        question:
+          "Sikap dan perilaku warga negara yang dijiwai oleh kecintaannya kepada Negara Kesatuan Republik Indonesia yang berdasarkan Pancasila dan UUD Negara Republik Indonesia Tahun 1945 dalam menjamin kelangsungan hidup bangsa dan negara disebut...",
+        answer: "Bela Negara",
         options: [
-          "Hubungan antara kelompok dan kelompok",
-          "Hubungan antara individu dan individu",
-          "Hubungan antara individu dan lingkungan",
-          "Hubungan timbal balik antara individu dan kelompok",
+          "Patriotisme",
+          "Bela Negara",
+          "Cinta tanah air",
+          "Nasionalisme",
         ],
       },
       {
-        quizId: "7",
-        question: "Apa saja bentuk interaksi manusia dengan lingkungan sosial?",
+        quizId: "13",
+        question:
+          'Dalam pasal 9 ayat (1) UU No. 33 Tahun 2022 tentang pertahanan negara, "Setiap warga negara berhak dan wajib ikut serta dalam upaya bela negara yang diwujudkan dalam penyelenggaraan pertahanan negara." Makna kata kewajiban dalam ketentuan tersebut adalah ...',
         answer:
-          "Individu dengan individu, individu dengan kelompok, kelompok dengan kelompok",
+          "Negara dapat memaksa setiap warga negara untuk ikut serta dalam pembelaan negara dalam keadaan tertentu",
         options: [
-          "Individu dengan individu, individu dengan kelompok, kelompok dengan kelompok",
-          "Individu dengan alam, individu dengan budaya, individu dengan ekonomi",
-          "Kelompok dengan budaya, kelompok dengan ekonomi, kelompok dengan individu",
-          "Individu dengan individu, kelompok dengan ekonomi, kelompok dengan budaya",
+          "Setiap Warga negara harus mengikuti wajib militer",
+          "Bila diwajibkan setiap warga negara ikut Dalam pembelaan negara",
+          "Hanya warga negara yang dipersyaratkan wajib ikut dalam pembelaan negara",
+          "Negara dapat memaksa setiap warga negara untuk ikut serta dalam pembelaan negara dalam keadaan tertentu",
         ],
       },
       {
-        quizId: "7",
-        question: "Apa yang termasuk dalam lingkungan alam?",
-        answer: "Lingkungan biotik dan lingkungan abiotic",
+        quizId: "13",
+        question: "Bela negara merupakan tugas dan tanggung jawab dari ...",
+        answer: "Seluruh rakyat Indonesia",
         options: [
-          "Lingkungan biotik dan lingkungan abiotic",
-          "Lingkungan biotik dan lingkungan ekonomi",
-          "Lingkungan biotik dan lingkungan sosial",
-          "Lingkungan sosial dan lingkungan budaya",
+          "Polisi",
+          "TNI",
+          "Seluruh rakyat Indonesia",
+          "Aparat Penegak Hukum",
         ],
       },
       {
-        quizId: "7",
-        question: "Apa yang dimaksud dengan globalisasi?",
+        quizId: "13",
+        question:
+          "Tiap-tiap warga negara berhak dan wajib ikut serta dalam usaha pertahanan dan keamanan negara merupakan bunyi peraturan dalam UUD 1945 pasal ...",
+        answer: "Pasal 30 ayat 1",
+        options: [
+          "Pasal 30 ayat 1",
+          "Pasal 30 ayat 2",
+          "Pasal 30 ayat 3",
+          "Pasal 30 ayat 4",
+        ],
+      },
+      {
+        quizId: "13",
+        question:
+          "Salah satu bentuk pembelaan terhadap negara dalam kondisi merdeka seperti sekarang dapat dilakukan dengan cara …",
+        answer: "mempertahankan Pancasila dan UUD 1945",
+        options: [
+          "menghafal Pancasila dan UUD 1945",
+          "mempertahankan Pancasila dan UUD 1945",
+          "membahas isi Pancasila dan UUD 1945",
+          "mengubah isi Pancasila dan UUD 1945",
+        ],
+      },
+      {
+        quizId: "13",
+        question:
+          "Salah satu upaya menumbuhkan rasa nasionalisme pelajar yaitu ....",
+        answer: "mengikuti upacara bendera",
+        options: [
+          "pembagian tugas piket",
+          "mengikuti upacara bendera",
+          "mengikuti les tambahan",
+          "mengikuti siskamling",
+        ],
+      },
+      {
+        quizId: "13",
+        question:
+          "Perwujudan upaya bela negara bagi seorang pelajar adalah ....",
         answer:
-          "Proses integrasi dan interaksi antara individu, perusahaan, dan negara",
+          "ikut serta menjaga keamanan lingkungan sekolah masing-masing dari berbagai ancaman dan gangguan",
         options: [
-          "Proses pembangunan infrastruktur",
-          "Proses adaptasi budaya lokal",
-          "Proses integrasi dan interaksi antara individu, perusahaan, dan negara",
-          "Proses perubahan dalam struktur Masyarakat",
+          "ikut serta menjaga keamanan lingkungan sekolah masing-masing dari berbagai ancaman dan gangguan",
+          "ikut serta menjaga daera-daerah yang rawan konflik",
+          "ikut serta dalam demo anti Malaysia yang berusaha merebut wilayah NKRI",
+          "mengajak masyarakat untuk selalu mengencangkan ikat pinggang",
         ],
       },
       {
-        quizId: "7",
+        quizId: "13",
         question:
-          "Apa dampak positif dari perubahan sosial pada masa Orde Baru?",
-        answer: "Menstabilkan kondisi politik",
+          "Ancaman terhadap keutuhan wilayah NKRI yang berasal dari luar negeri adalah ....",
+        answer:
+          "masuknya ideologi liberalisme dan komunisme yang dipermudah oleh kemajuan IPTEK",
         options: [
-          "Kebebasan berpendapat",
-          "Menstabilkan kondisi politik",
-          "Pembangunan merata di seluruh Indonesia",
-          "Pemerintah bersifat desentralistik",
+          "masuknya ideologi liberalisme dan komunisme yang dipermudah oleh kemajuan IPTEK",
+          "aksi radikalisme yang berlatar belakang SARA",
+          "gerakan separatis bersenjata yang ingin berpisah dari NKRI",
+          "terorisme dengan pelaku bangsa sendiri yang memiliki jaringan Internasional",
         ],
       },
       {
-        quizId: "7",
-        question: "Apa yang menjadi fokus utama pada masa reformasi?",
-        answer: "Pembatasan masa jabatan presiden",
-        options: [
-          "Program transmigrasi",
-          "Pembatasan masa jabatan presiden",
-          "Pembangunan infrastruktur",
-          "Kebijakan investasi",
-        ],
-      },
-      {
-        quizId: "7",
-        question: "Apa dampak negatif dari globalisasi?",
-        answer: "Lunturnya nilai-nilai budaya asli",
-        options: [
-          "Lunturnya nilai-nilai budaya asli",
-          "Peningkatan kualitas hidup",
-          "Berkembangnya ilmu pengetahuan",
-          "Masyarakat menjadi lebih terbuka",
-        ],
-      },
-      {
-        quizId: "7",
+        quizId: "13",
         question:
-          "Apa yang dimaksud dengan interaksi manusia dengan lingkungan budaya?",
-        answer: "Adaptasi terhadap aturan dan norma",
+          "Contoh bela negara melalui jalur pengabdian sesuai profesi ….",
+        answer: "perjuangan dokter dan paramedis menanggulangi wabah corona",
         options: [
-          "Kegiatan ekonomi sehari-hari",
-          "Adaptasi terhadap aturan dan norma",
-          "Hubungan dengan lingkungan alam",
-          "Interaksi sosial antar individu",
-        ],
-      },
-      {
-        quizId: "7",
-        question: "Apa yang menjadi ciri dari masa Orde Baru?",
-        answer: "Pemerintah bersifat sentralistik",
-        options: [
-          "Sistem pemerintahan desentralistik",
-          "Kebebasan berpendapat",
-          "Pemerintah bersifat sentralistik",
-          "Banyaknya partai politik baru",
-        ],
-      },
-      {
-        quizId: "7",
-        question:
-          "Apa yang menjadi salah satu dampak negatif dari masa reformasi?",
-        answer: "Ketidakstabilan kondisi politik",
-        options: [
-          "Kebebasan berpendapat yang bertanggung jawab",
-          "Peningkatan kualitas hidup",
-          "Ketidakstabilan kondisi politik",
-          "Pembangunan infrastruktur yang merata",
+          "perjuangan dokter dan paramedis menanggulangi wabah corona",
+          "orang tua menyekolahkan anak hingga perguruan tinggi",
+          "pengabdian terhadap orang tua yang lanjut usia",
+          "pengabdian ibu dalam mendidik putra-putrinya",
         ],
       },
     ],

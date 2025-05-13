@@ -59,7 +59,7 @@ export default function MateriPPKN() {
       </Head>
 
       <Navbar />
-      <main className="flex flex-col items-center min-h-screen p-4 bg-gray-100">
+      <main className="flex flex-col items-center min-h-screen p-4 bg-gray-100 font-afacad">
         <button
           onClick={() => router.back()}
           className="self-start mt-4 mb-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition ml-4"
