@@ -1,18 +1,28 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
 import ProfileForm from "./ProfileForm";
 import HistorySection from "@/components/quiz/HistorySection";
 import { useQuizzesWithGrades } from "@/hooks/useQuizzesWithGrades";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const { history, courseMap, loading, error } = useQuizzesWithGrades();
+
+  // 🔁 Redirect if unauthenticated
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/signin"); // or "/login", depending on your route
+    }
+  }, [status, router]);
 
   if (status === "loading") {
     return (
@@ -22,23 +32,14 @@ export default function ProfilePage() {
     );
   }
 
+  // No need to show anything else during redirect
   if (status === "unauthenticated") {
-    return (
-      <main className="min-h-screen flex items-center justify-center">
-        <Alert variant="destructive">
-          <AlertTitle>Akses Ditolak</AlertTitle>
-          <AlertDescription>
-            Silakan login untuk melihat profil Anda.
-          </AlertDescription>
-        </Alert>
-      </main>
-    );
+    return null;
   }
 
   return (
     <div className="flex flex-col min-h-screen font-afacad">
       <Navbar />
-
       <main className="flex-grow container mx-auto px-4 py-8 space-y-6">
         <Card>
           <CardHeader>
@@ -61,17 +62,14 @@ export default function ProfilePage() {
                 <Skeleton className="w-1/2 h-6" />
               </div>
             ) : error ? (
-              <Alert variant="destructive">
-                <AlertTitle>Terjadi Kesalahan</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
+              <div className="text-red-500">{error}</div>
             ) : (
               <HistorySection history={history} courseMap={courseMap} />
             )}
           </CardContent>
         </Card>
       </main>
-
+      <Toaster />
       <Footer />
     </div>
   );
