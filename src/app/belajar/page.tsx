@@ -91,6 +91,7 @@ export default function MateriAll() {
                 title={course.title}
                 description={course.description}
                 category={course.category}
+                coverImage={course.coverImage} // Pass the image prop
               />
             ))}
         </section>

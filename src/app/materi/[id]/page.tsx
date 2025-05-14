@@ -79,6 +79,7 @@ export default function MateriDetailPage() {
                     title={course.title}
                     description={course.description}
                     category={course.category}
+                    coverImage={course.coverImage} // Assuming you have a coverImage property
                   />
                 ))}
           </div>

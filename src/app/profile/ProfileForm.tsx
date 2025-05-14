@@ -4,27 +4,44 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { signOut } from "next-auth/react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ProfileForm({ session }: { session: any }) {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(session?.user?.name || "");
   const [email, setEmail] = useState(session?.user?.email || "");
+  const { toast } = useToast();
 
   const handleSave = async () => {
     try {
       const res = await fetch("/api/profile", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ name, email }),
       });
 
-      if (!res.ok) throw new Error("Failed to update profile");
+      if (!res.ok) {
+        throw new Error("Failed to update profile");
+      }
 
-      alert("Profile updated successfully!");
-      setEditing(false);
+      toast({
+        title: "Profil diperbarui",
+        description: "Anda akan keluar dalam 3 detik.",
+      });
+
+      setTimeout(async () => {
+        await signOut(); // Logs out after toast shows
+      }, 3000);
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile.");
+      toast({
+        variant: "destructive",
+        title: "Gagal memperbarui profil",
+        description: "Silakan coba lagi.",
+      });
     }
   };
 

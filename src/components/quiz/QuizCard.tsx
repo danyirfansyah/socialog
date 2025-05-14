@@ -16,6 +16,7 @@ interface QuizCardProps {
   description: string;
   category: string;
   grade?: number; // Optional
+  coverImage: string; // ✅ New prop
 }
 
 export default function QuizCard({
@@ -24,6 +25,7 @@ export default function QuizCard({
   description,
   category,
   grade,
+  coverImage,
 }: QuizCardProps) {
   const isFailing = grade !== undefined && grade < 60;
   const isPassing = grade !== undefined && grade >= 60;
@@ -40,13 +42,20 @@ export default function QuizCard({
             : "border-muted"
         )}
       >
-        <CardHeader>
-          <CardTitle className="text-base sm:text-lg font-semibold">
-            {title}
-          </CardTitle>
-          <CardDescription className="line-clamp-2 text-sm text-muted-foreground">
-            {description}
-          </CardDescription>
+        <CardHeader className="p-0">
+          <img
+            src={coverImage}
+            alt={`${title} cover`}
+            className="w-full h-40 object-cover rounded-t-md"
+          />
+          <div className="p-4">
+            <CardTitle className="text-base sm:text-lg font-semibold">
+              {title}
+            </CardTitle>
+            <CardDescription className="line-clamp-2 text-sm text-muted-foreground">
+              {description}
+            </CardDescription>
+          </div>
         </CardHeader>
 
         <CardContent className="text-sm">
