@@ -41,13 +41,8 @@ export default function Dashboard() {
           </p>
 
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/materi/ips">
-              <Button className="px-6">Materi IPS</Button>
-            </Link>
-            <Link href="/materi/ppkn">
-              <Button variant="secondary" className="px-6">
-                Materi PPKN
-              </Button>
+            <Link href="/belajar">
+              <Button className="px-6">Semua Materi</Button>
             </Link>
           </div>
         </div>
