@@ -71,7 +71,7 @@ export function SigninForm() {
                   id="identifier"
                   name="identifier"
                   type="text"
-                  placeholder="username or email"
+                  placeholder="email"
                   className="pr-10"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
