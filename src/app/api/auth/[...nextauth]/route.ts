@@ -5,9 +5,10 @@ import User from "@/models/user";
 import connect from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
-
 import { NextAuthOptions } from "next-auth";
 
+
+// Define authOptions
 const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -34,8 +35,7 @@ const authOptions: NextAuthOptions = {
             throw new Error("Incorrect password");
           }
 
-          // Pastikan bahwa kita mengembalikan user dengan properti yang benar
-          console.log("User found: ", user);  // Debugging untuk melihat apa yang ada di user
+          console.log("User found: ", user);  // Debugging to see the user object
           return user;
         } catch (error) {
           throw new Error("Error while logging in user");
@@ -46,11 +46,9 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        // Pastikan kita mengambil _id jika menggunakan MongoDB (bukan id)
-        token.id = (user as any)._id?.toString(); // Convert _id ke string
+        token.id = (user as any)._id?.toString();
         token.email = user.email;
 
-        // Hanya assign role jika ada di user
         if ('role' in user) {
           token.role = (user as any).role;
         }
@@ -59,14 +57,12 @@ const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token) {
-        // Pastikan id dan role sudah benar di token
-        console.log("Session token: ", token);  // Debugging untuk melihat isi token
+        console.log("Session token: ", token);  // Debugging token info
         session.user = {
           email: token.email,
           name: token.name,
           image: token.image as string | null | undefined,
         };
-        // Assign custom properties directly to session.user
         (session.user as any).id = token.id;
         (session.user as any).role = token.role;
       }
@@ -74,10 +70,10 @@ const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/login",  // Sesuaikan dengan halaman login Anda
+    signIn: "/login",  // Adjust to your login page
   },
-  secret: process.env.NEXTAUTH_SECRET,  // Pastikan Anda memiliki NEXTAUTH_SECRET di .env
+  secret: process.env.NEXTAUTH_SECRET,  // Ensure NEXTAUTH_SECRET is defined in your .env
 };
 
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+// Export authOptions directly
+export { authOptions };
