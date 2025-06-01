@@ -4,18 +4,11 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Link from "next/link";
-import Head from "next/head";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
-
-const BoxCard = ({ href, title }: { href: string; title: string }) => (
-  <Link
-    href={href}
-    className="flex items-center justify-center p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition"
-  >
-    <h2 className="text-xl font-semibold">{title}</h2>
-  </Link>
-);
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -29,63 +22,57 @@ export default function Dashboard() {
 
   if (status === "loading") {
     return (
-      <div className="flex items-center justify-center min-h-screen p-4 bg-gray-100">
-        <svg
-          className="animate-spin h-6 w-6 text-blue-500"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            className="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            strokeWidth="4"
-          />
-          <path
-            className="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-          />
-        </svg>
-        <p className="ml-2 text-lg">Loading...</p>
-      </div>
-    );
-  }
-
-  if (status === "unauthenticated") {
-    return (
-      <div className="flex items-center justify-center min-h-screen p-4 bg-gray-100">
-        <p className="text-lg">Redirecting to sign in...</p>
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+        <p>Loading...</p>
       </div>
     );
   }
 
   return (
     <>
-      <Head>
-        <title>Dashboard | YourApp</title>
-        <meta name="description" content="Selamat datang di Dashboard!" />
-      </Head>
-
       <Navbar />
+      <main className="min-h-screen bg-background text-foreground px-6 py-20 flex flex-col items-center font-afacad">
+        <div className="text-center max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+            Selamat Datang di <span className="text-primary">Dashboard</span>
+          </h1>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Jelajahi materi IPS dan PPKN, ikuti kuis untuk menguji pemahamanmu.
+          </p>
 
-      <main
-        role="main"
-        className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100"
-      >
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="mt-2 text-lg">Selamat datang di Dashboard!</p>
+          <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+            <Link href="/belajar">
+              <Button className="px-6">Semua Materi</Button>
+            </Link>
+          </div>
+        </div>
 
-        {/* Box Grid Section */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <BoxCard href="/materi/ips" title="IPS" />
-          <BoxCard href="/materi/ppkn" title="PPKn" />
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 w-full max-w-4xl">
+          <Card className="bg-muted/20">
+            <CardHeader>
+              <CardTitle>Interaktif & Visual</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Materi pembelajaran hadir dalam bentuk infografis, animasi, dan
+                video yang menarik. Pelajari sesuai gaya belajarmu!
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-muted/20">
+            <CardHeader>
+              <CardTitle>Kuis & Evaluasi</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Ikuti kuis interaktif dengan berbagai jenis soal, dapatkan skor
+                langsung, dan lihat riwayat hasilmu untuk terus berkembang.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </main>
-
       <Footer />
     </>
   );

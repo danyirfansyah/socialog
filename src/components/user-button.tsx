@@ -53,14 +53,14 @@ const UserButton = () => {
               Profile
             </DropdownMenuItem>
 
-            {session.user?.role === "admin" && (
+            {/* {session.user?.role === "admin" && (
               <DropdownMenuItem
                 onClick={() => router.push("/admin")}
                 className="cursor-pointer"
               >
                 Admin Panel
               </DropdownMenuItem>
-            )}
+            )} */}
             <DropdownMenuItem
               onClick={() => handleSignOut()}
               className="cursor-pointer"
