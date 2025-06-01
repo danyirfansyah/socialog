@@ -7,8 +7,7 @@ import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
 
-
-// Define authOptions
+// authOptions is the NextAuth configuration object
 const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -35,7 +34,6 @@ const authOptions: NextAuthOptions = {
             throw new Error("Incorrect password");
           }
 
-          console.log("User found: ", user);  // Debugging to see the user object
           return user;
         } catch (error) {
           throw new Error("Error while logging in user");
@@ -48,7 +46,6 @@ const authOptions: NextAuthOptions = {
       if (user) {
         token.id = (user as any)._id?.toString();
         token.email = user.email;
-
         if ('role' in user) {
           token.role = (user as any).role;
         }
@@ -57,7 +54,6 @@ const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token) {
-        console.log("Session token: ", token);  // Debugging token info
         session.user = {
           email: token.email,
           name: token.name,
@@ -70,10 +66,13 @@ const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/login",  // Adjust to your login page
+    signIn: "/login",
   },
-  secret: process.env.NEXTAUTH_SECRET,  // Ensure NEXTAUTH_SECRET is defined in your .env
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
-// Export authOptions directly
-export { authOptions };
+// Define the handler for NextAuth API routes
+const handler = NextAuth(authOptions);
+
+// Export GET and POST handlers for the API route
+export { handler as GET, handler as POST };
