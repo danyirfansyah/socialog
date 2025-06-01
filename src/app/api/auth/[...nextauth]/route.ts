@@ -5,9 +5,9 @@ import User from "@/models/user";
 import connect from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
+
 import { NextAuthOptions } from "next-auth";
 
-// authOptions is the NextAuth configuration object
 const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -33,7 +33,6 @@ const authOptions: NextAuthOptions = {
           if (!isPasswordCorrect) {
             throw new Error("Incorrect password");
           }
-
           return user;
         } catch (error) {
           throw new Error("Error while logging in user");
@@ -44,23 +43,21 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = (user as any)._id?.toString();
+        token.id = user.id;
         token.email = user.email;
-        if ('role' in user) {
-          token.role = (user as any).role;
-        }
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user = {
+          id: token.id,
           email: token.email,
           name: token.name,
           image: token.image as string | null | undefined,
+          role: token.role,
         };
-        (session.user as any).id = token.id;
-        (session.user as any).role = token.role;
       }
       return session;
     },
@@ -71,8 +68,5 @@ const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-// Define the handler for NextAuth API routes
 const handler = NextAuth(authOptions);
-
-// Export GET and POST handlers for the API route
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, authOptions };
