@@ -1,12 +1,10 @@
-import NextAuth from "next-auth";
-import User from "@/models/user";
-import connect from "@/lib/mongodb";
-import bcrypt from "bcryptjs";
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { NextAuthOptions } from "next-auth";
+import connect from "@/lib/mongodb";
+import User from "@/models/user";
+import bcrypt from "bcryptjs";
 
-// Define the NextAuth configuration
-export const authOptions: NextAuthOptions = { // Tambahkan export di sini jika perlu diimpor di tempat lain
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
@@ -65,10 +63,3 @@ export const authOptions: NextAuthOptions = { // Tambahkan export di sini jika p
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-
-// Handler exports for the Next.js API route
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
-// Hapus baris di bawah ini
-// export { authOptions };
