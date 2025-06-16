@@ -6,7 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
 
 // Define the NextAuth configuration
-export const authOptions: NextAuthOptions = { // Tambahkan export di sini jika perlu diimpor di tempat lain
+const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
@@ -70,5 +70,5 @@ export const authOptions: NextAuthOptions = { // Tambahkan export di sini jika p
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-// Hapus baris di bawah ini
+// Hapus baris di bawah ini untuk memperbaiki error
 // export { authOptions };
